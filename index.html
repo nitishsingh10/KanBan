@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kanban Task Board</title>
+    <link rel="stylesheet" href="./global-theme.css">
+    <link rel="stylesheet" href="./style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css" rel="stylesheet">
+</head>
+
+<body>
+    <header class="header">
+        <h1>Kanban Task Board</h1>
+        <button id="add-task-btn" class="submit-btn">+ Add New Task</button>
+    </header>
+
+    <div class="board">
+        <div class="column" data-status="todo">
+            <h2 class="column-title">To Do</h2>
+            <div class="task-list" id="todo-list"></div>
+        </div>
+        <div class="column" data-status="in-progress">
+            <h2 class="column-title">In Progress</h2>
+            <div class="task-list" id="in-progress-list"></div>
+        </div>
+        <div class="column" data-status="done">
+            <h2 class="column-title">Done</h2>
+            <div class="task-list" id="done-list"></div>
+        </div>
+    </div>
+
+    <!-- Task Modal -->
+    <div id="task-modal" class="modal hidden">
+        <div class="modal-content">
+            <h3 id="modal-title">Create Task</h3>
+            <input type="text" id="task-input" placeholder="Enter task title..." />
+            <div class="modal-actions">
+                <button id="cancel-btn" class="cancel-btn">Cancel</button>
+                <button id="save-btn" class="submit-btn">Save</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="./script.js"></script>
+</body>
+
+</html>

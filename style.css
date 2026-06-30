@@ -1,0 +1,288 @@
+/* style.css */
+
+body {
+    /* Using the global background and fonts */
+    background: var(--bg-primary);
+    font-family: var(--font-body);
+    color: var(--text-primary);
+    margin: 0;
+    padding: 20px;
+    min-height: 100vh;
+    box-sizing: border-box;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+    padding: 0 16px;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.header h1 {
+    font-family: var(--font-heading);
+    margin: 0;
+}
+
+.submit-btn {
+    /* Using the global accent and button radius */
+    background: var(--accent);
+    border: none;
+    border-radius: var(--radius-btn);
+    color: white;
+    padding: 10px 20px;
+    font-family: var(--font-body);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all var(--transition);
+    box-shadow: var(--shadow-glow);
+}
+
+.submit-btn:hover {
+    background: var(--accent-hover);
+    transform: translateY(-2px);
+}
+
+.cancel-btn {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-btn);
+    color: var(--text-secondary);
+    padding: 10px 20px;
+    font-family: var(--font-body);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all var(--transition);
+}
+
+.cancel-btn:hover {
+    background: var(--bg-card-hover);
+}
+
+.board {
+    display: flex;
+    gap: 20px;
+    height: calc(100vh - 120px);
+    overflow-x: auto;
+    padding-bottom: 20px;
+    align-items: flex-start;
+}
+
+.column {
+    background: rgba(255, 255, 255, 0.45);
+    backdrop-filter: blur(16px);
+    border-radius: var(--radius-card);
+    flex: 1;
+    min-width: 300px;
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    padding: 16px;
+    box-shadow: var(--shadow-card);
+    border: 1px solid var(--border);
+    max-height: 100%;
+}
+
+.column-title {
+    font-family: var(--font-heading);
+    font-size: 1.2rem;
+    margin-top: 0;
+    margin-bottom: 16px;
+    color: var(--text-primary);
+    border-bottom: 2px solid var(--border-accent);
+    padding-bottom: 8px;
+}
+
+.task-list {
+    flex: 1;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    min-height: 50px;
+    padding-bottom: 10px;
+}
+
+/* Scrollbar styling for task lists */
+.task-list::-webkit-scrollbar {
+    width: 6px;
+}
+.task-list::-webkit-scrollbar-track {
+    background: transparent;
+}
+.task-list::-webkit-scrollbar-thumb {
+    background: rgba(0,0,0,0.1);
+    border-radius: 10px;
+}
+
+/* Card */
+.task-card {
+    background: var(--bg-card);
+    border-radius: var(--radius-card);
+    padding: 16px;
+    box-shadow: var(--shadow-card);
+    cursor: grab;
+    position: relative;
+    border: 1px solid var(--border);
+    transition: all var(--transition);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+}
+
+.task-card:active {
+    cursor: grabbing;
+}
+
+.task-card:hover {
+    box-shadow: var(--shadow-glow);
+    transform: translateY(-2px);
+    border-color: var(--accent);
+}
+
+.task-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.task-title {
+    word-break: break-word;
+    font-weight: 500;
+    color: var(--text-primary);
+    line-height: 1.4;
+}
+
+.task-time {
+    margin: 0;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.task-actions {
+    display: flex;
+    gap: 8px;
+    opacity: 0;
+    transition: opacity var(--transition);
+}
+
+.task-card:hover .task-actions {
+    opacity: 1;
+}
+
+.icon-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--text-muted);
+    transition: color var(--transition);
+    padding: 4px;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.icon-btn.edit:hover { color: var(--accent); }
+.icon-btn.delete:hover { color: var(--error); }
+
+/* Drag and Drop visually */
+.task-card.dragging {
+    opacity: 0.5;
+}
+
+.column.drag-over {
+    background: rgba(10, 181, 246, 0.1);
+    border: 2px dashed var(--accent);
+}
+
+/* Modal */
+.modal {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    opacity: 1;
+    transition: opacity var(--transition);
+    backdrop-filter: blur(4px);
+    padding: 16px;
+    box-sizing: border-box;
+}
+
+.modal.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.modal-content {
+    background: var(--bg-card);
+    padding: 24px;
+    border-radius: var(--radius-card);
+    width: 100%;
+    max-width: 400px;
+    box-shadow: var(--shadow-card);
+    transform: translateY(0);
+    transition: transform var(--transition);
+    border: 1px solid var(--border);
+}
+
+.modal.hidden .modal-content {
+    transform: translateY(-20px);
+}
+
+.modal-content h3 {
+    margin-top: 0;
+    font-family: var(--font-heading);
+    margin-bottom: 20px;
+}
+
+#task-input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-input);
+    background: var(--bg-input);
+    margin-bottom: 20px;
+    font-family: var(--font-body);
+    box-sizing: border-box;
+    font-size: 1rem;
+    color: var(--text-primary);
+}
+
+#task-input:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(10, 181, 246, 0.1);
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+    .board {
+        flex-direction: column;
+        overflow-x: hidden;
+        overflow-y: auto;
+        height: auto;
+    }
+    
+    .column {
+        width: 100%;
+        max-width: none;
+        min-height: 250px;
+    }
+}
